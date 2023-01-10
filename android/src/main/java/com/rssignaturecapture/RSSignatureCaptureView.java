@@ -153,6 +153,15 @@ public class RSSignatureCaptureView extends View {
 			// Remove the first element from the list,
 			// so that we always have no more than 4 mPoints in mPoints array.
 			mPoints.remove(0);
+			return;
+		}
+
+		// Handle signature "dots".
+		if (mPoints.size() == 1) {
+			ensureSignatureBitmap();
+			mPaint.setStrokeWidth(mLastWidth);
+			mSignatureBitmapCanvas.drawPoint(newPoint.x, newPoint.y, mPaint);
+			expandDirtyRect(newPoint.x, newPoint.y);
 		}
 	}
 
